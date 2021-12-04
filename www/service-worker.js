@@ -26,6 +26,7 @@ self.addEventListener('activate', function (event) {
 
 // Serve files from cache
 self.addEventListener('fetch', function(event) {
+  console.log("fetch intercepted", event);
   event.respondWith(
     caches.open(staticCacheName).then(function(cache) {
       return cache.match(event.request).then(function (response) {
