@@ -6,6 +6,7 @@ var staticCacheName = cacheName + '1';
 
 // Cache files
 self.addEventListener('install', function (event) {
+  console.log("install");
   event.waitUntil(caches.open(staticCacheName).then(function (cache) {
     return cache.addAll([
       '/images/wemap-logo.png',
@@ -15,6 +16,7 @@ self.addEventListener('install', function (event) {
 
 // Remove old data/cache
 self.addEventListener('activate', function (event) {
+  console.log("activate");
   event.waitUntil(caches.keys().then(function (cacheNames) {
     return Promise.all(cacheNames.filter(function (cacheName) {
       return cacheName.startsWith(cacheName) && cacheName != staticCacheName;
