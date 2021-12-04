@@ -1,0 +1,36 @@
+body {
+  background-color: #D3D3D3;
+  height: 100vh;
+}
+
+.top-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.test-button {
+    margin-top: 30vh;
+    background-color: #808080;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #808080;
+    border-radius: 20px;
+    outline: 1px solid transparent;
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+}
+
+.test-button:active {
+    border: 1px solid black;
+}
+
+.test-image1 {
+    margin-top: 30px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
