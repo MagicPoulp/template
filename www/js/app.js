@@ -74,17 +74,18 @@ ReactDOM.render(
 
 // https://developers.google.com/web/ilt/pwa/introduction-to-service-worker
 function setUpServiceWorker() {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/js/service-worker.js', {
-        scope: '/images/'
-      })
+  if ('serviceWorker' in navigator) {
+    // for the scope to be above /js, the service worker cannot lie inside /js
+    navigator.serviceWorker.register('/service-worker.js', {
+      scope: '/images/'
+    })
       .then(function(registration) {
         console.log('Registration successful, scope is:', registration.scope);
       })
       .catch(function(error) {
         console.log('Service worker registration failed, error:', error);
       });
-    }
+  }
 }
 
 setUpServiceWorker();
