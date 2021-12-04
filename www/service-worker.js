@@ -10,6 +10,10 @@ self.addEventListener('install', function (event) {
   event.waitUntil(caches.open(staticCacheName).then(function (cache) {
     return cache.addAll([
       '/images/wemap-logo.png',
+      '/js/react.development.js',
+      '/js/react-dom.development.js',
+      '/js/app.js',
+      '/style.css',
     ]);
   }));
 });

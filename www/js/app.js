@@ -83,7 +83,8 @@ function setUpServiceWorker() {
   if ('serviceWorker' in navigator) {
     // for the scope to be above /js, the service worker cannot lie inside /js
     navigator.serviceWorker.register('/service-worker.js', {
-      scope: '/images/'
+      // no scope to cache more files
+      // scope: '/images/'
     })
       .then(function(registration) {
         console.log('Registration successful, scope is:', registration.scope);
