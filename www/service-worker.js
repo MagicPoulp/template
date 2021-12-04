@@ -7,6 +7,8 @@ var staticCacheName = cacheName + '1';
 // Cache files
 self.addEventListener('install', function (event) {
   console.log("install");
+  // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/skipWaiting
+  self.skipWaiting();
   event.waitUntil(caches.open(staticCacheName).then(function (cache) {
     return cache.addAll([
       '/images/wemap-logo.png',
