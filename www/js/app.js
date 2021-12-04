@@ -29,14 +29,20 @@ class ImageFetcherComponent extends Component{
 
   clickTestButton() {
       if (this.isImageLoaded) {
-        return
+        return;
       }
       fetch(this.imagesApiPath + 'wemap-logo.png')
-      .then(response => response.blob())
+      .then(response => {
+        if (response.status !== 200) {
+          throw new Error('image not found, response.status = ' + response.status)
+        }
+        return response.blob()
+      })
       .then((blob) => {
         var image = this.testImage1;
         this.blobToBase64(blob)
-        .then((dataUrl) => {
+          .then((dataUrl) => {
+            console.log(dataUrl)
           image.src = dataUrl;
           this.isImageLoaded = true;
           this.setState({
