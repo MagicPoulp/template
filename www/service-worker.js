@@ -7,12 +7,6 @@ var staticCacheName = cacheName + '1';
 // Cache files
 self.addEventListener('install', function (event) {
   console.log("install");
-
-  // this removes an error due to a bug reported in chromium
-  // https://stackoverflow.com/questions/48463483/what-causes-a-failed-to-execute-fetch-on-serviceworkerglobalscope-only-if
-  if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
-    return;
-  }
   // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/skipWaiting
   self.skipWaiting();
   event.waitUntil(caches.open(staticCacheName).then(function (cache) {
@@ -42,11 +36,6 @@ clients.claim() can override this default, and take control of non-controlled pa
 // Remove old data/cache
 self.addEventListener('activate', function (event) {
   console.log("activate");
-  // this removes an error due to a bug reported in chromium
-  // https://stackoverflow.com/questions/48463483/what-causes-a-failed-to-execute-fetch-on-serviceworkerglobalscope-only-if
-  if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
-    return;
-  }
   event.waitUntil(self.clients.claim());
   event.waitUntil(caches.keys().then(function (cacheNames) {
     return Promise.all(cacheNames.filter(function (cacheName) {
