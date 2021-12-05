@@ -20,9 +20,23 @@ self.addEventListener('install', function (event) {
   }));
 });
 
+/*
+why use claim
+https://developer.mozilla.org/fr/docs/Web/API/Clients/claim
+
+A service worker is not active upon installation
+https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle
+
+Excerpt from the doc:
+"A service worker won't receive events like fetch and push until it successfully finishes installing and becomes "active".
+By default, a page's fetches won't go through a service worker unless the page request itself went through a service worker. So you'll need to refresh the page to see the effects of the service worker.
+clients.claim() can override this default, and take control of non-controlled pages."
+
+*/
 // Remove old data/cache
 self.addEventListener('activate', function (event) {
   console.log("activate");
+  event.waitUntil(self.clients.claim());
   event.waitUntil(caches.keys().then(function (cacheNames) {
     return Promise.all(cacheNames.filter(function (cacheName) {
       return cacheName.startsWith(cacheName) && cacheName != staticCacheName;
