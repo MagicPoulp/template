@@ -101,7 +101,7 @@ setUpServiceWorker();
 
 var workerReady = false;
 navigator.serviceWorker.ready.then(function(registration) {
-  var workerReady = true;
+  workerReady = true;
   console.log('A service worker is active:', registration.active);
   launchReactApp();
 });
