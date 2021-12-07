@@ -73,10 +73,12 @@ class ReactApp extends Component{
   };
 }
 
-ReactDOM.render(
-  e(ReactApp),
-  document.getElementById('react-app'),
-);
+function launchReactApp() {
+  ReactDOM.render(
+    e(ReactApp),
+    document.getElementById('react-app'),
+  );
+}
 
 // https://developers.google.com/web/ilt/pwa/introduction-to-service-worker
 function setUpServiceWorker() {
@@ -96,3 +98,7 @@ function setUpServiceWorker() {
 }
 
 setUpServiceWorker();
+navigator.serviceWorker.ready.then(function(registration) {
+  console.log('A service worker is active:', registration.active);
+  launchReactApp();
+});
