@@ -98,7 +98,16 @@ function setUpServiceWorker() {
 }
 
 setUpServiceWorker();
+
+var workerReady = false;
 navigator.serviceWorker.ready.then(function(registration) {
+  var workerReady = true;
   console.log('A service worker is active:', registration.active);
   launchReactApp();
 });
+setTimeout(
+  function() {
+    if (!workerReady) {
+      console.log("Error, serviceWorker.ready did not happen after 2s");
+    }
+  }, 2000);
