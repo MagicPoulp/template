@@ -5,7 +5,12 @@ const e = createElement;
 // we call a function in kotlin that will show an error page
 function displayError(message) {
   console.error(message);
-  interface.callfromJS(message);
+  try {
+    interface.callfromJS(message);
+  }
+  catch (e) {
+    launchReactApp();
+  }
 }
 
 class ImageFetcherComponent extends Component{
