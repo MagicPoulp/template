@@ -2,7 +2,7 @@
 // https://gist.github.com/mohandere/9f293c9d02d094b4c39956c8f3008694
 
 var cacheName = 'my-domain1-cache-';
-var staticCacheName = cacheName + '1';
+var staticCacheName = cacheName + '2';
 
 // Cache files
 self.addEventListener('install', function (event) {
@@ -60,7 +60,8 @@ self.addEventListener('fetch', function(event) {
         return response || fetch(event.request, {
           mode: 'no-cors'
         }).then(function(response) {
-          cache.put(event.request, response.clone());
+          // We should not cache all requests, such as index.html
+          // cache.put(event.request, response.clone());
           return response;
         });
       });
