@@ -2,7 +2,7 @@
 // https://gist.github.com/mohandere/9f293c9d02d094b4c39956c8f3008694
 
 var cacheName = 'my-domain1-cache-';
-var staticCacheName = cacheName + '2';
+var staticCacheName = cacheName + '3';
 
 // Cache files
 self.addEventListener('install', function (event) {

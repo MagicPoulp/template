@@ -6,7 +6,7 @@ const e = createElement;
 function displayError(message) {
   console.error(message);
   try {
-    interface.callfromJS(message);
+    interface.callFromJS(message);
   }
   catch (e) {
     console.log('interface.callfromJS was caught');
