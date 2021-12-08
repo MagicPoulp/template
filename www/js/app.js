@@ -2,6 +2,12 @@
 const { createElement, Component } = React;
 const e = createElement;
 
+// we call a function in kotlin that will show an error page
+function displayError(message) {
+  console.error(message);
+  interface.callfromJS(message);
+}
+
 class ImageFetcherComponent extends Component{
 
   // a local URL does not need a service worker but an external one does
@@ -12,15 +18,21 @@ class ImageFetcherComponent extends Component{
   render() {
     return [
       e('button', {
+        className: 'test-error-button',
+        id: 'test-error-button',
+        key: 'f1',
+        onClick: () => { displayError('The button could trigger an error.'); }
+      }, 'Test error page'),
+      e('button', {
         className: 'test-button',
         id: 'test-button',
-        key: 'f1',
+        key: 'f2',
         onClick: () => { this.clickTestButton(); }
       }, 'Get image'),
       e('img', {
        className: this.isImageLoaded ? 'test-image1' : 'hidden',
        id: 'test-image1',
-       key: 'f2',
+       key: 'f3',
        ref: (node) => { this.testImage1 = node; } ,
        alt: 'exists'
      }, null),
@@ -34,7 +46,8 @@ class ImageFetcherComponent extends Component{
       fetch(this.imagesApiPath + 'wemap-logo.png')
       .then(response => {
         if (response.status !== 200) {
-          throw new Error('image not found, response.status = ' + response.status)
+          displayError('image not found, response.status = ' + response.status);
+          return;
         }
         return response.blob()
       })
@@ -92,7 +105,7 @@ function setUpServiceWorker() {
         console.log('Registration successful, scope is:', registration.scope);
       })
       .catch(function(error) {
-        console.log('Service worker registration failed, error:', error);
+        displayError('Service worker registration failed, error:');
       });
   }
 }
@@ -108,6 +121,6 @@ navigator.serviceWorker.ready.then(function(registration) {
 setTimeout(
   function() {
     if (!workerReady) {
-      console.log("Error, serviceWorker.ready did not happen after 2s");
+      displayError('Error, serviceWorker.ready did not happen after 2s');
     }
   }, 2000);

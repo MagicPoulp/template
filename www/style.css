@@ -10,6 +10,18 @@ body {
     height: 100%;
 }
 
+.test-error-button {
+    margin-top: calc(30vh - 40px);
+    background-color: #808080;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #808080;
+    border-radius: 20px;
+    outline: 1px solid transparent;
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+}
+
 .test-button {
     margin-top: 30vh;
     background-color: #808080;
