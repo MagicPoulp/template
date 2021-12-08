@@ -9,6 +9,8 @@ function displayError(message) {
     interface.callfromJS(message);
   }
   catch (e) {
+    console.log('interface.callfromJS was caught');
+    console.log(e);
     launchReactApp();
   }
 }
